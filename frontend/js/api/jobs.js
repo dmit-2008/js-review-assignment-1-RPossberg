@@ -8,7 +8,7 @@ that you use the "SEARCH (GET) Jobs" get job endpoint to do this.
 export async function getJobs(search) {
   try {
     const response = await fetch(
-      `http://localhost:5173/jobs?search=${encodeURIComponent(search)}`
+      `http://localhost:3000/jobs?search=${encodeURIComponent(search)}`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
