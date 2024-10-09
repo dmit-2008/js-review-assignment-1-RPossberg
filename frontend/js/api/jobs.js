@@ -23,7 +23,7 @@ export async function getJobs(search) {
 
 export async function getJobDetails(jobId) {
   try {
-    const response = await fetch(`http://localhost:5173/jobs/${jobId}`);
+    const response = await fetch(`http://localhost:3000/jobs/${jobId}`);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -34,3 +34,5 @@ export async function getJobDetails(jobId) {
     return null;
   }
 }
+
+// export { getJobs, getJobDetails };
