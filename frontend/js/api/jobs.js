@@ -5,15 +5,32 @@ Note:
 It is preferred (for the automated testing to pass correctly)
 that you use the "SEARCH (GET) Jobs" get job endpoint to do this.
 */
-import { getJobs } from "./api.js";
+export async function getJobs(search) {
+  try {
+    const response = await fetch(
+      `http://localhost:5173/jobs?search=${encodeURIComponent(search)}`
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const jobs = await response.json();
+    return jobs;
+  } catch (error) {
+    console.error("Error fetching jobs:", error);
+    return [];
+  }
+}
 
-export function handleFormSubmission() {
-  const form = document.querySelector("form");
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const formData = new FormData(form);
-    const search = formData.get("search");
-    const jobs = await getJobs(search);
-    console.log(jobs);
-  });
+export async function getJobDetails(jobId) {
+  try {
+    const response = await fetch(`http://localhost:5173/jobs/${jobId}`);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const job = await response.json();
+    return job;
+  } catch (error) {
+    console.error("Error fetching job details:", error);
+    return null;
+  }
 }

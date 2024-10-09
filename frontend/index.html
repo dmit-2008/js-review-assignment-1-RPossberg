@@ -8,8 +8,8 @@
 
     <title>Job Search</title>
 
-    <!-- Link your JS File here via a script tag for parcel below -->
-
+    <!-- Link your JS File here via a script tag for Parcel below -->
+    <!-- <script type="module" src="/main.js"></script> -->
 
   </head>
 
@@ -37,10 +37,9 @@
           <li class="nav-item">
             <a class="nav-link" href="#">My Bookmarked Jobs</a>
           </li>
-
         </ul>
       </div>
-      <div id="search-jobs-tab" class=" container album py-3 bg-body-tertiary">
+      <div id="search-jobs-tab" class="container album py-3 bg-body-tertiary">
         <h5 class="text-dark">Search</h5>
         <form id="search-jobs-form">
           <div class="row">
@@ -53,28 +52,25 @@
           </div>
         </form>
         <h2 class="text-dark">Results</h2>
-        <div class="row ">
-
+        <div class="row">
           <div class="col-6 mb-1">
             <ul id="searched-jobs" class="px-0">
-
+              <!-- Job cards will be appended here -->
             </ul>
           </div>
-          <div class="col-6 mb-1">
-            <div id="job-details-card">
-
-            </div>
-          </div>
         </div>
-
+      </div>
       </div>
       <div id="my-jobs-tab" class="d-none container py-3 bg-body-tertiary">
         <h5 class="text-dark mb-1">Bookmarked Jobs</h5>
         <div class="col-12 mb-1">
           <ul id="my-jobs" class="px-0">
-
+            <!-- Bookmarked job cards will be appended here -->
           </ul>
         </div>
+      </div>
+      <div id="job-details-card" class="container py-3 bg-body-tertiary">
+        <!-- Job details will be displayed here -->
       </div>
     </main>
 
