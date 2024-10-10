@@ -1,10 +1,9 @@
 import { toElement } from "../utils/toElement.js";
-// Function to create a job card element
-function createJobCard(job) {
-  const li = document.createElement("li");
-  li.className = "job-card card my-1";
-  li.style.width = "18rem";
-  li.innerHTML = `
+
+// Function to create a job card template string
+function jobCardTemplate(job) {
+  return `
+    <li class="job-card card my-1" style="width: 18rem;">
       <div class="card-header">${job.company}</div>
       <div class="card-body">
         <h5 class="card-title">${job.title}</h5>
@@ -16,10 +15,11 @@ function createJobCard(job) {
           job.id
         }">View Job</button>
       </div>
-    `;
-  return li;
+    </li>
+  `;
 }
 
+// Function to create a job card element
 export function jobCard(job) {
   const template = jobCardTemplate(job);
   return toElement(template);
