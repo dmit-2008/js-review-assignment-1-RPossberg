@@ -1,7 +1,5 @@
-function toElement(html) {
-  var template = document.createElement("template");
-  template.innerHTML = html;
+export function toElement(templateString) {
+  const template = document.createElement("template");
+  template.innerHTML = templateString.trim();
   return template.content.firstChild;
 }
-
-export { toElement };

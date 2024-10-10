@@ -5,7 +5,7 @@ console.log("Hello from index.js!");
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getJobs, getJobDetails } from "./api/jobs.js";
 import { jobCard } from "./templates/jobcard.js";
-import { displayJobDetails } from "./templates/jobdetails.js"; // Corrected import
+import { displayJobDetails } from "./templates/jobdetails.js";
 
 // Function to fetch jobs and display them
 async function displayJobs(search = "") {
@@ -35,8 +35,7 @@ async function displayJobs(search = "") {
       }
     });
   } catch (error) {
-    console.error("Error fetching jobs:", error);
-    alert("Failed to fetch jobs. Please try again later.");
+    console.error("Error displaying jobs:", error);
   }
 }
 
