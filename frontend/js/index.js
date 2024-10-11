@@ -12,6 +12,7 @@ async function displayJobs(search = "") {
   try {
     const jobs = await getJobs(search);
     const jobList = document.getElementById("searched-jobs");
+    console.log(jobs);
     jobList.innerHTML = "";
 
     if (jobs.length === 0) {
@@ -26,9 +27,11 @@ async function displayJobs(search = "") {
 
     // Add event listener to view job details using event delegation
     jobList.addEventListener("click", async (event) => {
-      if (event.target.classList.contains("view-job-button")) {
-        const jobId = event.target.getAttribute("job-data-id");
+      const button = event.target.closest(".view-job-button");
+      if (button) {
+        const jobId = button.getAttribute("job-data-id");
         const job = await getJobDetails(jobId);
+        console.log(job); // Ensure job details are logged
         if (job) {
           displayJobDetails(job);
         }
