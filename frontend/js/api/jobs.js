@@ -5,34 +5,15 @@ Note:
 It is preferred (for the automated testing to pass correctly)
 that you use the "SEARCH (GET) Jobs" get job endpoint to do this.
 */
+// Import the necessary functions
 import { fetcher } from "../utils/fetcher.js";
 
 export async function getJobs(search) {
-  try {
-    const response = await fetch(
-      `http://localhost:3000/jobs?search=${encodeURIComponent(search)}`
-    );
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    const jobs = await response.json();
-    return jobs;
-  } catch (error) {
-    console.error("Error fetching jobs:", error);
-    return [];
-  }
+  const url = `http://localhost:3000/jobs?search=${encodeURIComponent(search)}`;
+  return await fetcher(url);
 }
 
 export async function getJobDetails(jobId) {
-  try {
-    const response = await fetch(`http://localhost:3000/jobs/${jobId}`);
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    const job = await response.json();
-    return job;
-  } catch (error) {
-    console.error("Error fetching job details:", error);
-    return null;
-  }
+  const url = `http://localhost:3000/jobs/${jobId}`;
+  return await fetcher(url);
 }

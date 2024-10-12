@@ -1,18 +1,33 @@
 // Initialize the application
 console.log("Hello from index.js!");
 
-// Import the necessary functions
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getJobs, getJobDetails } from "./api/jobs.js";
-import { jobCard } from "./templates/jobcard.js";
-import { displayJobDetails } from "./templates/jobdetails.js";
+import { getJobs, getJobDetails } from "./api/jobs.js"; // Import the getJobs function
+import { jobCard } from "./templates/jobcard.js"; // Import the jobCard function
+import { displayJobDetails } from "./templates/jobdetails.js"; // Import the displayJobDetails function
+
+// Global variables
+const jobDetailsCard = document.getElementById("job-details-card"); // Get the job details card element
+
+// Add event listener to the search form
+const searchForm = document.getElementById("search-jobs-form");
+searchForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const searchInput = document.getElementById("query-input"); // Corrected selector
+  if (searchInput) {
+    const search = searchInput.value.trim().toLowerCase();
+    await displayJobs(search);
+  } else {
+    console.error('Search input element not found');
+  }
+});
 
 // Function to fetch jobs and display them
 async function displayJobs(search = "") {
   try {
     const jobs = await getJobs(search);
     const jobList = document.getElementById("searched-jobs");
-    console.log(jobs);
+    console.log("Jobs fetched:", jobs); // Debugging: Log the fetched jobs
     jobList.innerHTML = "";
 
     if (jobs.length === 0) {
@@ -31,7 +46,6 @@ async function displayJobs(search = "") {
       if (button) {
         const jobId = button.getAttribute("job-data-id");
         const job = await getJobDetails(jobId);
-        console.log(job); // Ensure job details are logged
         if (job) {
           displayJobDetails(job);
         }
@@ -41,15 +55,3 @@ async function displayJobs(search = "") {
     console.error("Error displaying jobs:", error);
   }
 }
-
-// Handle form submission for job search
-document
-  .getElementById("search-jobs-form")
-  .addEventListener("submit", async function (event) {
-    event.preventDefault();
-    const query = document.getElementById("query-input").value;
-    await displayJobs(query);
-  });
-
-// Call the function to display jobs on page load
-displayJobs();
