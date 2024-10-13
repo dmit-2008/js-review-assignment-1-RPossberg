@@ -12,7 +12,7 @@ const searchForm = document.getElementById("search-jobs-form"); // Get the searc
 const searchInput = document.getElementById("query-input"); // Get the search input element
 
 // Call the function to display jobs on page load
-// displayJobs();
+displayJobs();
 
 // Handle form submission for job search
 document
