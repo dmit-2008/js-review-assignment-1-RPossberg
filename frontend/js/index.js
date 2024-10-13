@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function displaySavedJobs() {
     try {
       const savedJobs = await getSavedJobs(); // Fetch saved jobs
+      console.log("Saved jobs:", savedJobs); // Add this line to check the fetched data
       const savedJobList = document.getElementById("my-jobs");
       savedJobList.innerHTML = ""; // Clear previous saved jobs
 
@@ -108,5 +109,16 @@ document.addEventListener("DOMContentLoaded", () => {
     searchJobsTab.classList.add("d-none");
     myJobsTab.classList.remove("d-none");
     await displaySavedJobs();
+  });
+
+  // Add event listener to save job from job details card
+  jobDetailsCard.addEventListener("click", async (event) => {
+    const button = event.target.closest(".save-job-button");
+    if (button) {
+      const jobId = button.getAttribute("job-data-id");
+      const job = await getJobDetails(jobId); // Fetch job details to save
+      await saveJob(job);
+      alert("Job saved successfully!");
+    }
   });
 });
