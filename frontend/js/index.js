@@ -8,12 +8,28 @@ import { displayJobDetails } from "./templates/jobdetails.js"; // Import the dis
 
 // Global variables
 const jobDetailsCard = document.getElementById("job-details-card"); // Get the job details card element
+const searchForm = document.getElementById("search-jobs-form"); // Get the search form element
+const searchInput = document.getElementById("query-input"); // Get the search input element
+
+// Call the function to display jobs on page load
+// displayJobs();
+
+// Handle form submission for job search
+document
+  .getElementById("search-jobs-form")
+  .addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const query = document.getElementById("query-input").value;
+    console.log("Search query:", query);
+    await displayJobs(query);
+  });
+
+// Function to fetch jobs and display them
+
 
 // Add event listener to the search form
-const searchForm = document.getElementById("search-jobs-form");
 searchForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const searchInput = document.getElementById("query-input"); // Corrected selector
   if (searchInput) {
     const search = searchInput.value.trim().toLowerCase();
     await displayJobs(search);
