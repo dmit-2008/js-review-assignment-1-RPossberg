@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to fetch jobs and display them
   async function displayJobs(search = "") {
     try {
+      // Clear job details card
+      jobDetailsCard.innerHTML = "";
+
       const jobs = await getJobs(search);
       const jobList = document.getElementById("searched-jobs");
       jobList.innerHTML = ""; // Clear previous search results
@@ -41,6 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const job = await getJobDetails(jobId);
           if (job) {
             displayJobDetails(job);
+          } else {
+            alert("Job not found. Please try again later.");
           }
         }
       });
@@ -75,6 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const job = await getJobDetails(jobId);
           if (job) {
             displayJobDetails(job);
+          } else {
+            alert("Job not found. Please try again later.");
           }
         }
       });
