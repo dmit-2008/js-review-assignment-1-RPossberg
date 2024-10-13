@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function displaySavedJobs() {
     try {
       const savedJobs = await getSavedJobs(); // Fetch saved jobs
-      console.log("Saved jobs:", savedJobs); // Add this line to check the fetched data
+      console.log("Saved jobs:", savedJobs); // Debugging log
       const savedJobList = document.getElementById("my-jobs");
       savedJobList.innerHTML = ""; // Clear previous saved jobs
 
@@ -112,13 +112,24 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Add event listener to save job from job details card
-  jobDetailsCard.addEventListener("click", async (event) => {
-    const button = event.target.closest(".save-job-button");
+  document.addEventListener("click", async (event) => {
+    const button = event.target.closest(".save-job");
     if (button) {
-      const jobId = button.getAttribute("job-data-id");
-      const job = await getJobDetails(jobId); // Fetch job details to save
-      await saveJob(job);
-      alert("Job saved successfully!");
+      console.log("Save job button clicked!");
+      const jobElement = button.closest(".card");
+      const jobId = jobElement.getAttribute("job-data-id");
+      if (!jobId) {
+        console.error("Job ID is null or undefined");
+        alert("Failed to save job. Please try again later.");
+        return;
+      }
+      const job = await getJobDetails(jobId);
+      if (job) {
+        await saveJob(job);
+        alert("Job saved successfully!");
+      } else {
+        alert("Failed to save job. Please try again later.");
+      }
     }
   });
 });
