@@ -39,3 +39,12 @@ export function displayJobDetails(job) {
   const jobDetailsElement = createJobDetails(job);
   jobDetailsCard.appendChild(jobDetailsElement);
 }
+
+// Add event listener to save job button
+document.addEventListener("click", async (event) => {
+  const button = event.target.closest(".save-job");
+  if (button) {
+    console.log("Save job button clicked!");
+  }
+});
+
